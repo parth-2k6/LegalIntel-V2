@@ -53,8 +53,7 @@ export default function DocumentVerifierPage() {
   const onTaskUpdate = (task: any) => {
     if (task.status === 'completed') {
       const taskResult = task.result as AnalysisResult;
-      setResult({ ...taskResult, ...task.payload });
-      setUploadedFile(task.payload);
+      setResult({ ...taskResult, ...uploadedFile });
       setCurrentTaskId(null);
     } else if (task.status === 'failed') {
       toast({
@@ -85,7 +84,7 @@ export default function DocumentVerifierPage() {
           const fileInfo = { fileName: file.name, fileAsBase64, mimeType: file.type };
           setUploadedFile(fileInfo);
           
-          const taskPayload = { type: 'classifyDocument', payload: { ...fileInfo }};
+          const taskPayload = { type: 'classifyDocument', payload: fileInfo };
           const response = await createTask(user.uid, taskPayload);
 
           if ('error' in response) {
@@ -197,7 +196,7 @@ export default function DocumentVerifierPage() {
               </CardContent>
             </Card>
             
-            {result && uploadedFile && result.fileAsBase64 && result.mimeType && result.fileName && (
+            {result && uploadedFile && (
               <Card>
                 <CardHeader>
                   <CardTitle className="font-display">AI Legal Simulator</CardTitle>
@@ -206,9 +205,9 @@ export default function DocumentVerifierPage() {
                 <CardContent className="p-0">
                   <ChatInterface 
                     fileData={{
-                        fileAsBase64: result.fileAsBase64,
-                        mimeType: result.mimeType,
-                        fileName: result.fileName
+                        fileAsBase64: uploadedFile.fileAsBase64,
+                        mimeType: uploadedFile.mimeType,
+                        fileName: uploadedFile.fileName
                     }}
                     className="h-[600px]" 
                     initialMessages={[{role: 'assistant', content: `Hello! I'm LexiAI. I have your document "${uploadedFile.fileName}" ready. What would you like to know? You can ask me to explain a clause, simulate a scenario, or clarify legal terms.`}]}
@@ -226,12 +225,10 @@ export default function DocumentVerifierPage() {
           </CardHeader>
           <CardContent>
             {isProcessing ? (
-              <div className="space-y-4 pt-4">
-                <p className="text-sm text-muted-foreground text-center">Analyzing your document... This may take a moment.</p>
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-32 w-full" />
-                <Skeleton className="h-20 w-full" />
-                <Skeleton className="h-20 w-full" />
+              <div className="space-y-4 pt-4 text-center">
+                <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+                <p className="text-sm text-muted-foreground">Analyzing your document... This may take a moment.</p>
+                <p className="text-xs text-muted-foreground/80">Please keep this window open. You can continue to other parts of the site.</p>
               </div>
             ) : result ? (
               <div className="space-y-6">
