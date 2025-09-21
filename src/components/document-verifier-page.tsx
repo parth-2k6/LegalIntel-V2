@@ -1,7 +1,7 @@
 
 'use client';
 
-import { AlertTriangle, Briefcase, FileJson, FileSearch2, Flame, GanttChart, Handshake, Info, Landmark, Layers, Loader2, Microscope, Pilcrow, Scale, Shield, Sparkles, Upload, UserRoundCheck, Wallet } from 'lucide-react';
+import { AlertTriangle, Briefcase, FileJson, FileSearch2, Flame, GanttChart, Handshake, Info, Landmark, Layers, Loader2, Microscope, Pilcrow, Scale, Shield, Sparkles, Upload, UserRoundCheck, Wallet, GitCompare } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { createTask } from '@/app/actions';
