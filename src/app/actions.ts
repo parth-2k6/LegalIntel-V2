@@ -30,7 +30,7 @@ export async function createTask(userId: string, taskData: { type: string, paylo
         });
 
         // This is where a background worker would normally take over.
-        // For this environment, we'll process it immediately.
+        // For this environment, we'll process it immediately but the client won't wait.
         if (taskData.type === 'classifyDocument') {
             processClassifyDocumentTask(userId, taskRef.id, taskData.payload);
         } else if (taskData.type === 'askQuestion') {
