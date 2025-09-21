@@ -1,8 +1,8 @@
 # ⚖️ LegalIntel: AI-Powered Legal Document Analysis
 
-LegalIntel is a powerful web application designed to demystify complex legal documents for everyday users. By leveraging the power of Google's Gemini generative AI, it provides comprehensive analysis, risk assessment, and interactive simulations, making legal information more accessible and understandable.
+LegalIntel is a powerful web application designed to demystify complex legal documents for everyday users. By leveraging the power of Google's Gemini generative AI, it provides comprehensive analysis, risk assessment and interactive simulations making legal information more accessible and understandable.
 
-Whether you're a tenant reviewing a lease, a freelancer checking a contract, or simply someone trying to understand a complex agreement, LegalIntel is your AI-powered legal assistant.
+Whether you're a tenant reviewing a lease, a freelancer checking a contract or simply someone trying to understand a complex agreement. LegalIntel is your AI-powered legal assistant.
 
 ## ✨ Key Features
 
@@ -13,7 +13,7 @@ Whether you're a tenant reviewing a lease, a freelancer checking a contract, or 
 - **🎭 Role-Play Simulator**: Practice legal scenarios by role-playing with an AI. Choose a role (client, lawyer, judge) and a scenario to prepare for real-life interviews and negotiations.
 - **🤝 Lawyer Recommendations**: Based on the document's content, the app suggests a category of lawyer and can recommend affiliated lawyers for consultation.
 - **🔐 Secure & Private**: Built on Firebase, ensuring user data is secure. Documents are processed privately and are tied to your account.
-- **👨‍⚖️ Admin & Lawyer Dashboards**: Includes dedicated dashboards for admins to manage users and lawyers, and for lawyers to manage their profiles and case logs.
+- **👨‍⚖️ Admin & Lawyer Dashboards**: Includes dedicated dashboards for admins to manage users and lawyers and for lawyers to manage their profiles and case logs.
 
 ## 🚀 Tech Stack
 
@@ -25,12 +25,12 @@ Whether you're a tenant reviewing a lease, a freelancer checking a contract, or 
 
 ## ⚙️ Getting Started
 
-To get a local copy up and running, follow these simple steps.
+To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
 - Node.js (v18 or later)
-- A Firebase project with Authentication, Firestore, and Storage enabled.
+- A Firebase project with Authentication, Firestore and Storage enabled.
 
 ### Setup
 
@@ -84,6 +84,8 @@ To get a local copy up and running, follow these simple steps.
     Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
 
 ## 🤝 Contributing
+
+# Developed With ❤️ By Team Anix
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
