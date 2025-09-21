@@ -11,10 +11,10 @@ export default function AppFooter() {
           <span>By Team ANIX</span>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Link href="https://www.linkedin.com/in/parth-tiwari-b38b88342" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5 text-muted-foreground transition-colors hover:text-primary" />
           </Link>
-          <Link href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Link href="https://www.instagram.com/_anix.co_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <Instagram className="h-5 w-5 text-muted-foreground transition-colors hover:text-primary" />
           </Link>
         </div>
