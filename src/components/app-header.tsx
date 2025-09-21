@@ -1,8 +1,9 @@
 
 'use client';
 
+import * as React from 'react';
 import Link from 'next/link';
-import { Scale, History, LogIn, LogOut, Bot, ShieldCheck, Users, User as UserIcon, LayoutDashboard } from 'lucide-react';
+import { Scale, History, LogOut, Bot, ShieldCheck, Users, User as UserIcon, LayoutDashboard, Menu, LogIn } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '@/hooks/use-auth';
 import { useEffect, useState } from 'react';
@@ -10,12 +11,14 @@ import { getFirestore, doc, onSnapshot } from 'firebase/firestore';
 import { app } from '@/lib/firebase-config';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 
 export default function AppHeader() {
   const { user, signOut, loading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLawyer, setIsLawyer] = useState(false);
   const [userData, setUserData] = useState<{ displayName?: string, photoURL?: string, email?: string } | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -44,6 +47,17 @@ export default function AppHeader() {
     }
   }, [user]);
 
+  const navLinks = (
+    <>
+      <Link href="/">Analyzer</Link>
+      <Link href="/history">History</Link>
+      <Link href="/legal-simulator">Simulator</Link>
+      {isLawyer && user && <Link href={`/dashboard/${user.uid}`}>Dashboard</Link>}
+      {isAdmin && <Link href="/admin">Lawyers</Link>}
+      {isAdmin && <Link href="/users">Users</Link>}
+    </>
+  );
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -54,19 +68,38 @@ export default function AppHeader() {
             <span className="hidden font-bold sm:inline-block">LegalIntel</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            {user && (
-              <>
-                <Link href="/">Analyzer</Link>
-                <Link href="/history">History</Link>
-                <Link href="/legal-simulator">Simulator</Link>
-                {isLawyer && <Link href={`/dashboard/${user.uid}`}>Dashboard</Link>}
-                {isAdmin && <Link href="/admin">Lawyers</Link>}
-                {isAdmin && <Link href="/users">Users</Link>}
-              </>
-            )}
+            {user && navLinks}
           </nav>
         </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+        
+        {/* Mobile Menu */}
+        <div className="md:hidden">
+         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <div className="p-4">
+                 <Link href="/" className="mr-6 flex items-center space-x-2 mb-6" onClick={() => setMobileMenuOpen(false)}>
+                    <Scale className="h-6 w-6" />
+                    <span className="font-bold">LegalIntel</span>
+                  </Link>
+                <nav className="flex flex-col gap-4 text-lg">
+                  {user ? (
+                    React.Children.map(navLinks.props.children, child => 
+                      child ? React.cloneElement(child, { onClick: () => setMobileMenuOpen(false) }) : null
+                    )
+                  ) : null}
+                </nav>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="flex flex-1 items-center justify-end space-x-2">
           <nav className="flex items-center gap-2">
             {loading ? null : user ? (
               <DropdownMenu>
